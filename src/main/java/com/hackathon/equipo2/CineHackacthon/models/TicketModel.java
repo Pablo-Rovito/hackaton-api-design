@@ -3,9 +3,9 @@ package com.hackathon.equipo2.CineHackacthon.models;
 public class TicketModel extends ShowModel {
     private long ticketId;
     private long seatId;
-    private long price;
+    private double price;
 
-    public TicketModel(ShowModel show, long ticketId, long seatId, long price) {
+    public TicketModel(ShowModel show, long ticketId, long seatId, double price) {
         super(show.getShowId(), show.getRoomModel(), show.getMovieId(), show.getScheduleId());
         this.ticketId = ticketId;
         this.seatId = seatId;
@@ -28,11 +28,11 @@ public class TicketModel extends ShowModel {
         this.seatId = seatId;
     }
 
-    public long getPrice() {
+    public double getPrice() {
         return price;
     }
 
-    public void setPrice(long price) {
+    public void setPrice(double price) {
         this.price = price;
     }
 }
