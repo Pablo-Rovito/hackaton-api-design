@@ -23,7 +23,7 @@ public class TicketController {
         return ticketService.getAllBuyTickets();
     }//getAllBuyTickets
 
-    @GetMapping("/tickets/ id}")
+    @GetMapping("/tickets/{id}")
     public ResponseEntity<Object> findTicketById(@PathVariable long ticketId) {
         System.out.println("findTicketById en TicketController");
         System.out.println("El id del ticket es: " + ticketId);
