@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 
 @RestController
-@RequestMapping("/theater/v1/")
+@RequestMapping("/theater/v1")
 public class Controller {
 
 }
