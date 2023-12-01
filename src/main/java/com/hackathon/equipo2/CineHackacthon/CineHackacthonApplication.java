@@ -1,6 +1,7 @@
 package com.hackathon.equipo2.CineHackacthon;
 
 import com.hackathon.equipo2.CineHackacthon.models.MovieModel;
+import com.hackathon.equipo2.CineHackacthon.models.ShowModel;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
@@ -12,9 +13,12 @@ public class CineHackacthonApplication {
 
 	public static ArrayList<MovieModel> movies = new ArrayList<>();
 
+	public static List<ShowModel> showModel = new ArrayList<ShowModel>();
+
 	public static void main(String[] args) {
 		SpringApplication.run(CineHackacthonApplication.class, args);
 		moviesListExamples();
+		CineHackacthonApplication.showModel = CineHackacthonApplication.getShowsModel();
 		System.out.println("Application initialized!");
 	}
 
@@ -45,6 +49,15 @@ public class CineHackacthonApplication {
 
 				)
 		);
+	}
+
+	private static List<ShowModel> getShowsModel() {
+		List<ShowModel> showModels = new ArrayList<ShowModel>();
+		showModels.add(new ShowModel(1l, null, 1l, 1l));
+
+
+		return showModels;
+
 	}
 
 }
