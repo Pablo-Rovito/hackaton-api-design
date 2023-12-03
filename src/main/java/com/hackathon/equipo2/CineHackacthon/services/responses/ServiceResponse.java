@@ -2,10 +2,9 @@ package com.hackathon.equipo2.CineHackacthon.services.responses;
 
 import org.springframework.http.HttpStatus;
 
-public class ServiceResponse {
-
+public abstract class ServiceResponse {
+    private boolean success;
     private HttpStatus httpStatus;
-
     private String code;
     private String message;
     private Object payload;
@@ -13,11 +12,12 @@ public class ServiceResponse {
     public ServiceResponse() {
     }
 
-    public ServiceResponse(HttpStatus httpStatus, String code, String message, Object payload) {
+    public ServiceResponse(HttpStatus httpStatus, String code, String message, Object payload, boolean success) {
         this.httpStatus = httpStatus;
         this.code = code;
         this.message = message;
         this.payload = payload;
+        this.success = success;
     }
 
     public HttpStatus getHttpStatus() {
@@ -50,5 +50,13 @@ public class ServiceResponse {
 
     public void setPayload(Object payload) {
         this.payload = payload;
+    }
+
+    public boolean isSuccess() {
+        return success;
+    }
+
+    public void setSuccess(boolean success) {
+        this.success = success;
     }
 }
