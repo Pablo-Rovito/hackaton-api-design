@@ -4,17 +4,12 @@ import com.hackathon.equipo2.CineHackacthon.models.TicketModel;
 import com.hackathon.equipo2.CineHackacthon.utils.TicketEnum;
 import org.springframework.http.HttpStatus;
 
-public class TicketServiceResponse extends ServiceResponse<TicketModel> {
+public class TicketServiceResponse<T> extends ServiceResponse<T> {
 
     public TicketServiceResponse() {
     }
 
-    public TicketServiceResponse(HttpStatus httpStatus, String code, String message, TicketModel payload) {
-        super(httpStatus, code, message, payload);
-    }
-
-
-    public TicketServiceResponse(TicketEnum ticketEnum, TicketModel payload) {
+    public TicketServiceResponse(TicketEnum ticketEnum, T payload) {
         super(ticketEnum.getHttpStatus(), ticketEnum.getCode(), ticketEnum.getMessage(), payload);
     }
 

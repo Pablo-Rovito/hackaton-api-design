@@ -2,6 +2,7 @@ package com.hackathon.equipo2.CineHackacthon.controllers;
 
 import com.hackathon.equipo2.CineHackacthon.models.MovieModel;
 import com.hackathon.equipo2.CineHackacthon.services.MovieService;
+import com.hackathon.equipo2.CineHackacthon.services.responses.MovieServiceResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -17,40 +18,41 @@ public class MovieController extends com.hackathon.equipo2.CineHackacthon.contro
 
     @GetMapping("/movies")
     public List<MovieModel> findAll() {
-        List<MovieModel> result = this.movieService.findAll().stream().toList();
+        List<MovieModel> result = this.movieService.findAll().getMovies();
 
         return result;
     }
 
     @GetMapping("/movies/{id}")
-    public MovieModel getMovieById(
+    public MovieServiceResponse getMovieById(
             @PathVariable Long id
     ) {
-        MovieModel result = this.movieService.findById(id);
+        MovieServiceResponse result = this.movieService.findById(id);
 
         return result;
     }
 
     @PostMapping("/movies")
-    public MovieModel addMovie(
+    public MovieServiceResponse addMovie(
             @RequestBody MovieModel movie
     ) {
-        this.movieService.add(movie);
-        return movie;
+        MovieServiceResponse result = this.movieService.add(movie);
+        return result;
     }
 
     @DeleteMapping("/movies/{id}")
-    public Boolean deleteMovieById(
+    public MovieServiceResponse deleteMovieById(
             @PathVariable Long id
     ) {
-
-        return this.movieService.remove(id);
+        MovieServiceResponse result = this.movieService.remove(id);
+        return result;
     }
 
     @PutMapping("/movies")
-    public Boolean updateMovie(
+    public MovieServiceResponse updateMovie(
             @RequestBody MovieModel movieModel
     ) {
-        return this.movieService.update(movieModel);
+        MovieServiceResponse result = this.movieService.update(movieModel);
+        return result;
     }
 }

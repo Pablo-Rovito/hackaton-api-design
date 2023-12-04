@@ -11,33 +11,38 @@ import java.util.Optional;
 public class MovieRepository {
 
     public List<MovieModel> findAll() {
-        return CineHackacthonApplication.movies;
+        return CineHackacthonApplication.movies.stream().toList();
     }
 
-    public MovieModel findById(Long id) {
+    public Optional<MovieModel> findById(Long id) {
         Optional<MovieModel> movie = CineHackacthonApplication.movies.stream().filter(movieModel -> movieModel.getId().equals(id)).findFirst();
         if (movie.isPresent()) {
-            return movie.get();
-        } else return null;
+            return movie;
+        } else return Optional.empty();
     }
 
-    public Boolean add(MovieModel movie) {
-        return CineHackacthonApplication.movies.add(movie);
+    public MovieModel add(MovieModel movie) {
+        CineHackacthonApplication.movies.add(movie);
+        System.out.println(CineHackacthonApplication.movies);
+        return movie;
     }
 
-    public Boolean remove(Long id) {
-        MovieModel movie = this.findById(id);
-        return CineHackacthonApplication.movies.remove(movie);
+    public Optional<MovieModel> remove(Long id) {
+        Optional<MovieModel> movie = this.findById(id);
+        if (movie.isPresent()) {
+            CineHackacthonApplication.movies.remove(movie.get());
+            return movie;
+        } else {
+            return Optional.empty();
+        }
     }
 
-    public Boolean update(MovieModel movieModel) {
+    public Optional<MovieModel> update(MovieModel movieModel) {
 
-        MovieModel movie = this.findById(movieModel.getId());
-        if(movie != null) {
-            CineHackacthonApplication.movies.set(CineHackacthonApplication.movies.indexOf(movie),
-                    movieModel
-            );
-            return true;
-        } else return false;
+        Optional<MovieModel> movie = this.findById(movieModel.getId());
+        if (movie.isPresent()) {
+            CineHackacthonApplication.movies.set(CineHackacthonApplication.movies.indexOf(movie.get()), movieModel);
+            return movie;
+        } else return Optional.empty();
     }
 }

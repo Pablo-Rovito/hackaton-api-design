@@ -4,6 +4,7 @@ import com.hackathon.equipo2.CineHackacthon.models.MovieModel;
 import com.hackathon.equipo2.CineHackacthon.models.ShowModel;
 import com.hackathon.equipo2.CineHackacthon.models.ShowValidatorModel;
 import com.hackathon.equipo2.CineHackacthon.repositories.ShowRepository;
+import com.hackathon.equipo2.CineHackacthon.services.responses.MovieServiceResponse;
 import com.hackathon.equipo2.CineHackacthon.services.responses.ShowServiceResponse;
 import com.hackathon.equipo2.CineHackacthon.utils.ShowServiceEnum;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -58,8 +59,8 @@ public class ShowService {
 
         ShowValidatorModel valid = this.canAddShow(show);
 
-        MovieModel movie = this.movieService.findById(show.getMovie().getId());
-        show.setMovie(movie);
+        MovieServiceResponse movie = this.movieService.findById(show.getMovie().getId());
+        show.setMovie((MovieModel) movie.getPayload());
 
 //        RoomModel room = this.roomService.findById(show.getRoomModel().getId());
 
