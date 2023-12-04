@@ -66,6 +66,20 @@ public class ShowService {
         return responseService;
     }
 
+    public ShowServiceResponse<List<ShowModel>> findByMovieId(Long movieId) {
+
+        List<ShowModel> showList = new ArrayList<ShowModel>();
+        ShowServiceResponse<List<ShowModel>> responseService = new ShowServiceResponse<List<ShowModel>>(ShowServiceEnum.SHOW_CALL_ERROR, showList);
+
+        List<ShowModel> showsMovies = this.showRepository.findByMovieId(movieId);
+
+        responseService.setShowServiceEnum(ShowServiceEnum.SHOW_CALL_OK);
+        responseService.setPayload(showsMovies);
+
+        return responseService;
+    }
+
+
     public ShowServiceResponse<ShowModel> addShow(ShowModel show) {
         ShowModel result = new ShowModel();
         ShowServiceResponse<ShowModel> responseService = new ShowServiceResponse<ShowModel>(ShowServiceEnum.SHOW_CALL_ERROR, result);
