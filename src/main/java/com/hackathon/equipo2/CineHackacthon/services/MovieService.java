@@ -21,22 +21,22 @@ public class MovieService {
     MovieValidator movieValidator;
 
 
-    public MovieServiceResponse findAll() {
-        MovieServiceResponse response = movieValidator.existMovieList(this.movieRepository.findAll());
+    public MovieServiceResponse<List<MovieModel>> findAll() {
+        MovieServiceResponse<List<MovieModel>> response = movieValidator.existMovieList(this.movieRepository.findAll());
         if(response.getHttpStatus() == MovieEnum.OK.getHttpStatus()) {
             response.setMovies(this.movieRepository.findAll());
         }
         return response;
     }
 
-    public MovieServiceResponse findById(Long id) {
-        MovieServiceResponse response = movieValidator.exist(this.movieRepository.findById(id));
+    public MovieServiceResponse<MovieModel> findById(Long id) {
+        MovieServiceResponse<MovieModel> response = movieValidator.exist(this.movieRepository.findById(id));
         return response;
 
     }
 
-    public MovieServiceResponse add(MovieModel movie) {
-        MovieServiceResponse response = movieValidator.createMovie(this.movieRepository.findById(movie.getId()), movie);
+    public MovieServiceResponse<MovieModel> add(MovieModel movie) {
+        MovieServiceResponse<MovieModel> response = movieValidator.createMovie(this.movieRepository.findById(movie.getId()), movie);
         System.out.println(response.getHttpStatus());
         if(response.getHttpStatus() == MovieEnum.CREATED.getHttpStatus()){
             this.movieRepository.add(movie);
@@ -45,16 +45,16 @@ public class MovieService {
 
     }
 
-    public MovieServiceResponse remove(Long id) {
-        MovieServiceResponse response = movieValidator.removeMovie(this.movieRepository.findById(id));
+    public MovieServiceResponse<MovieModel> remove(Long id) {
+        MovieServiceResponse<MovieModel> response = movieValidator.removeMovie(this.movieRepository.findById(id));
         if(response.getHttpStatus() == MovieEnum.OK.getHttpStatus()) {
              this.movieRepository.remove(id);
         }
         return response;
     }
 
-    public MovieServiceResponse update(MovieModel movieModel) {
-        MovieServiceResponse response = movieValidator.updateMovie(this.movieRepository.findById(movieModel.getId()));
+    public MovieServiceResponse<MovieModel> update(MovieModel movieModel) {
+        MovieServiceResponse<MovieModel> response = movieValidator.updateMovie(this.movieRepository.findById(movieModel.getId()));
         if(response.getHttpStatus() == MovieEnum.OK.getHttpStatus()){
             this.movieRepository.update(movieModel);
         }
