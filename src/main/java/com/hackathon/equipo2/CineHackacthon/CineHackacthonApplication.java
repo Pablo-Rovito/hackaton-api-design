@@ -1,15 +1,15 @@
 package com.hackathon.equipo2.CineHackacthon;
 
 
-import com.hackathon.equipo2.CineHackacthon.models.RoomModel;
-import com.hackathon.equipo2.CineHackacthon.models.ShowModel;
-import com.hackathon.equipo2.CineHackacthon.models.TicketModel;
-import com.hackathon.equipo2.CineHackacthon.models.MovieModel;
+import com.hackathon.equipo2.CineHackacthon.models.*;
 import com.hackathon.equipo2.CineHackacthon.models.ShowModel;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @SpringBootApplication
@@ -17,7 +17,7 @@ public class CineHackacthonApplication {
 
 
 	public static List<TicketModel> tickets = new ArrayList<>();
-	public static ArrayList<MovieModel> movies = new ArrayList<>();
+	public static List<MovieModel> movies = new ArrayList<>();
 
 	public static List<ShowModel> showModel = new ArrayList<ShowModel>();
 
@@ -25,10 +25,9 @@ public class CineHackacthonApplication {
 		SpringApplication.run(CineHackacthonApplication.class, args);
         System.out.println("Application initialized!");
 
-		moviesListExamples();
+		CineHackacthonApplication.movies = CineHackacthonApplication.moviesListExamples();
 		CineHackacthonApplication.showModel = CineHackacthonApplication.getShowsModel();
 		CineHackacthonApplication.tickets = CineHackacthonApplication.getBuyTicket();
-
 	}
 
 	public static List<TicketModel> getBuyTicket() {
@@ -44,39 +43,55 @@ public class CineHackacthonApplication {
 		return buyTickets;
 	}//getBuyTicket
 
-	private static void moviesListExamples() {
-		movies.add(
-				new MovieModel(
+	private static List<MovieModel> moviesListExamples() {
+		List<MovieModel> movies = new ArrayList<MovieModel>();
+		movies.add(new MovieModel(
 						1L,
 						"Interstellar",
 						"Ciencia Ficcion sinopsis"
-
 				)
 		);
-
-		movies.add(
-				new MovieModel(
+		movies.add(new MovieModel(
 						2L,
 						"Titanic",
 						"Historia de amor sinopsis"
-
 				)
 		);
-
-		movies.add(
-				new MovieModel(
+		movies.add(new MovieModel(
 						3L,
 						"Avatar",
 						"Fantasia sinopsis"
 
 				)
 		);
+		return movies;
 	}
 
 	private static List<ShowModel> getShowsModel() {
 		List<ShowModel> showModels = new ArrayList<ShowModel>();
-		showModels.add(new ShowModel(1l, null, 1l, 1l));
+		List<MovieModel> movies = CineHackacthonApplication.moviesListExamples();
+		MovieModel movie = new MovieModel();
+		Date dateStart = new Date();
+		Date dateEnd = new Date();
+		try {
+			String dateStartS = "2023-12-01 18:00";
+			DateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+			dateStart = format.parse(dateStartS);
 
+			String dateEndS = "2023-12-01 20:00";
+			DateFormat formatEnd = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+			dateEnd = formatEnd.parse(dateEndS);
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}
+
+
+		showModels.add(new ShowModel(1l
+						, new RoomModel()
+						, movies.isEmpty() ? movie : movies.get(0)
+						, new ScheduleModel(1l, dateStart,  dateEnd)
+				)
+		);
 
 		return showModels;
 

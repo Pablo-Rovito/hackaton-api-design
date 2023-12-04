@@ -30,11 +30,11 @@ public class ShowRepository {
     }
 
 
-
-
-
-
-
-
-
+    public long getNextId() {
+        long id = 0;
+        for (ShowModel show: CineHackacthonApplication.showModel) {
+            id = Math.max(show.getShowId(), id);
+        }
+        return id + 1;
+    }
 }

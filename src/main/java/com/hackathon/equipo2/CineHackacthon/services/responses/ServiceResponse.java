@@ -2,18 +2,19 @@ package com.hackathon.equipo2.CineHackacthon.services.responses;
 
 import org.springframework.http.HttpStatus;
 
-public class ServiceResponse {
+public class ServiceResponse<T> {
 
     private HttpStatus httpStatus;
 
     private String code;
     private String message;
-    private Object payload;
+
+    private T payload;
 
     public ServiceResponse() {
     }
 
-    public ServiceResponse(HttpStatus httpStatus, String code, String message, Object payload) {
+    public ServiceResponse(HttpStatus httpStatus, String code, String message, T payload) {
         this.httpStatus = httpStatus;
         this.code = code;
         this.message = message;
@@ -44,11 +45,11 @@ public class ServiceResponse {
         this.message = message;
     }
 
-    public Object getPayload() {
+    public T getPayload() {
         return payload;
     }
 
-    public void setPayload(Object payload) {
+    public void setPayload(T payload) {
         this.payload = payload;
     }
 }

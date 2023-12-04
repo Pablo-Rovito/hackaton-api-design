@@ -3,17 +3,18 @@ package com.hackathon.equipo2.CineHackacthon.models;
 public class ShowModel {
     private long showId;
     private RoomModel roomModel;
-    private long movieId;
-    private long scheduleId;
+    private MovieModel movie;
+    private ScheduleModel schedule;
 
     public ShowModel() {
     }
 
-    public ShowModel(long showId, RoomModel roomModel, long movieId, long scheduleId) {
+    public ShowModel(long showId, RoomModel roomModel, MovieModel movie, ScheduleModel schedule) {
+//        this.showId = showId;
         this.showId = showId;
         this.roomModel = roomModel;
-        this.movieId = movieId;
-        this.scheduleId = scheduleId;
+        this.movie = movie;
+        this.schedule = schedule;
     }
 
     public long getShowId() {
@@ -32,19 +33,19 @@ public class ShowModel {
         this.roomModel = roomModel;
     }
 
-    public long getMovieId() {
-        return movieId;
+    public MovieModel getMovie() {
+        return movie;
     }
 
-    public void setMovieId(long movieId) {
-        this.movieId = movieId;
+    public void setMovie(MovieModel movie) {
+        this.movie = movie;
     }
 
-    public long getScheduleId() {
-        return scheduleId;
+    public ScheduleModel getSchedule() {
+        return schedule;
     }
 
-    public void setScheduleId(long scheduleId) {
-        this.scheduleId = scheduleId;
+    public void setSchedule(ScheduleModel schedule) {
+        this.schedule = schedule;
     }
 }
