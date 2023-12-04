@@ -1,13 +1,8 @@
 package com.hackathon.equipo2.CineHackacthon.services;
 
-import com.hackathon.equipo2.CineHackacthon.models.SeatModel;
-import com.hackathon.equipo2.CineHackacthon.models.ShowModel;
 import com.hackathon.equipo2.CineHackacthon.utils.SeatStatusEnum;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
-import java.util.Optional;
 
 @Service
 public class SeatService {

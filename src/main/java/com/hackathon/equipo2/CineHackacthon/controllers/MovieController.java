@@ -1,6 +1,5 @@
 package com.hackathon.equipo2.CineHackacthon.controllers;
 
-import com.hackathon.equipo2.CineHackacthon.CineHackacthonApplication;
 import com.hackathon.equipo2.CineHackacthon.models.MovieModel;
 import com.hackathon.equipo2.CineHackacthon.services.MovieService;
 import com.hackathon.equipo2.CineHackacthon.services.responses.MovieServiceResponse;
