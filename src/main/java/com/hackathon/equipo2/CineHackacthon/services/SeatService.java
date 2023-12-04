@@ -37,4 +37,20 @@ public class SeatService {
         seatServiceResponse.setMessage(SeatEnum.OK.getMessage());
         return seatServiceResponse;
     }
+
+    public Optional<SeatModel> findById(long idSeat, long idShow) {
+        return   showService
+                .findById(idShow)
+                .getPayload()
+                .getRoomModel()
+                .getSeats()
+                .stream()
+                .filter(seatModel -> seatModel.getId() == idSeat)
+                .findFirst();
+    }
+
+    public void changeStatus(long idSeat, long idShow, SeatStatusEnum seatEnum) {
+        SeatModel seatModel = findById(idSeat, idShow).get();
+        seatModel.setStatusCode(seatEnum);
+    }
 }

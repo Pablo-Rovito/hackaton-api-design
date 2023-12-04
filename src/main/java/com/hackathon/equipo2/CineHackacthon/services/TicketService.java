@@ -6,6 +6,8 @@ import com.hackathon.equipo2.CineHackacthon.models.TicketValidatorModel;
 import com.hackathon.equipo2.CineHackacthon.repositories.TicketRepository;
 import com.hackathon.equipo2.CineHackacthon.services.responses.ShowServiceResponse;
 import com.hackathon.equipo2.CineHackacthon.services.responses.TicketServiceResponse;
+import com.hackathon.equipo2.CineHackacthon.utils.SeatStatusEnum;
+import com.hackathon.equipo2.CineHackacthon.utils.TicketEnum;
 import com.hackathon.equipo2.CineHackacthon.validators.AbstractValidator;
 import com.hackathon.equipo2.CineHackacthon.utils.SeatStatusEnum;
 import com.hackathon.equipo2.CineHackacthon.utils.TicketEnum;
@@ -27,13 +29,14 @@ public class TicketService {
     TicketRepository ticketRepository;
     @Autowired
     TicketValidator ticketValidator;
-    @Autowired
-    SeatService seatService;
+
     @Autowired
     TicketExistsShowValidator ticketExistsShowValidator;
 
     @Autowired
     TicketSeatIsAvailableValidator ticketSeatIsAvailableValidator;
+    @Autowired
+    SeatService seatService;
 
     List<AbstractValidator<TicketModel, TicketValidatorModel>> validators;
 
