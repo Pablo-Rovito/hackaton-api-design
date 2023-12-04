@@ -74,6 +74,7 @@ public class TicketService {
         ticket.setShow(showResponse.getPayload());
 
         seatService.changeStatus(ticket.getSeatId(), ticket.getShowId(), SeatStatusEnum.UNAVAILABLE);
+        ticketRepository.createTicket(ticket);
 
         responseService = ticketValidator.createTicket(ticketRepository.createTicket(ticket));
         return responseService;
