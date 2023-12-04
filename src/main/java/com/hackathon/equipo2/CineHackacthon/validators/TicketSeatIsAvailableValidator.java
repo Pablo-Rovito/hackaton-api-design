@@ -35,7 +35,7 @@ public class TicketSeatIsAvailableValidator extends AbstractValidator<TicketMode
                     TicketEnum.SEAT_NOT_FOUND);
         }
 
-        if(seatModel.get().getStatusCode() == SeatStatusEnum.AVAILABLE || seatModel.get().getStatusCode() == SeatStatusEnum.RESERVED) {
+        if(seatModel.get().getStatusCode() == SeatStatusEnum.UNAVAILABLE || seatModel.get().getStatusCode() == SeatStatusEnum.RESERVED) {
             return new TicketValidatorModel(
                     false,
                     ValidatorEnum.NOT_VALID,
