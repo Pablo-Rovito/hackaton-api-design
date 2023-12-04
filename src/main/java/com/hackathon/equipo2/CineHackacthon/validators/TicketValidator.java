@@ -23,8 +23,7 @@ public class TicketValidator {
                                         ticketFind.get().getSchedule(),
                                         ticketFind.get().getPrice()),
                             ticketFind.get().getTicketId(),
-                            ticketFind.get().getSeatId(),
-                            ticketFind.get().getPrice()));
+                            ticketFind.get().getSeatId()));
         }//if
 
         return new TicketServiceResponse(
@@ -44,9 +43,7 @@ public class TicketValidator {
                                 ticketBuy.getPrice()
                         ),
                         ticketBuy.getTicketId(),
-                        ticketBuy.getSeatId(),
-                        ticketBuy.getPrice())
-        );
+                        ticketBuy.getSeatId()));
     }//createTicket
 
 }//class
