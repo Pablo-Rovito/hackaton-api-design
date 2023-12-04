@@ -1,10 +1,10 @@
 package com.hackathon.equipo2.CineHackacthon.services;
 
+import com.hackathon.equipo2.CineHackacthon.models.ShowModel;
 import com.hackathon.equipo2.CineHackacthon.models.TicketModel;
-import com.hackathon.equipo2.CineHackacthon.models.TicketValidatorModel;
 import com.hackathon.equipo2.CineHackacthon.repositories.TicketRepository;
+import com.hackathon.equipo2.CineHackacthon.services.responses.ShowServiceResponse;
 import com.hackathon.equipo2.CineHackacthon.services.responses.TicketServiceResponse;
-import com.hackathon.equipo2.CineHackacthon.validators.AbstractValidator;
 import com.hackathon.equipo2.CineHackacthon.validators.TicketSeatIsAvailableValidator;
 import com.hackathon.equipo2.CineHackacthon.validators.TicketValidator;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +14,8 @@ import java.util.List;
 
 @Service
 public class TicketService {
+    @Autowired
+    ShowService showService;
 
     @Autowired
     TicketRepository ticketRepository;
@@ -28,17 +30,21 @@ public class TicketService {
         return ticketRepository.getAllBuyTickets();
     }//getAllBuyTickets
 
-    public TicketServiceResponse findTicketById(long ticketId) {
+    public TicketServiceResponse<TicketModel> findTicketById(long ticketId) {
         System.out.println("findTicketById en TicketService");
 
         return ticketValidator.ticketExist(ticketRepository.findTicketById(ticketId));
     }//findTicketById
 
-    public TicketServiceResponse createTicket(TicketModel ticket) {
+    public TicketServiceResponse<TicketModel> createTicket(TicketModel ticket) {
         System.out.println("createTicket en TicketService");
         if(ticketSeatIsAvailableValidator.apply(ticket).isValid()){
-            return new TicketServiceResponse(ticketSeatIsAvailableValidator.apply(ticket).getTicketEnum(), ticket);
+            return new TicketServiceResponse<TicketModel>(ticketSeatIsAvailableValidator.apply(ticket).getTicketEnum(), ticket);
         }
+
+        ShowServiceResponse<ShowModel> showResponse = showService.findById(ticket.getShowId());
+        ticket.setShow(showResponse.getPayload());
+
         return ticketValidator.createTicket(ticketRepository.createTicket(ticket));
     }//createTicket
 
