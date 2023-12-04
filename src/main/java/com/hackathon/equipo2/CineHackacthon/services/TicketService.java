@@ -42,7 +42,7 @@ public class TicketService {
 
     public TicketServiceResponse<TicketModel> createTicket(TicketModel ticket) {
         System.out.println("createTicket en TicketService");
-        if(ticketSeatIsAvailableValidator.apply(ticket).isValid()){
+        if(!ticketSeatIsAvailableValidator.apply(ticket).isValid()){
             return new TicketServiceResponse<TicketModel>(ticketSeatIsAvailableValidator.apply(ticket).getTicketEnum(), ticket);
         }
 
