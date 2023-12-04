@@ -7,7 +7,6 @@ import com.hackathon.equipo2.CineHackacthon.services.responses.RoomServiceRespon
 import com.hackathon.equipo2.CineHackacthon.utils.RoomEnum;
 import com.hackathon.equipo2.CineHackacthon.validators.roomValidators.RoomValidator;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

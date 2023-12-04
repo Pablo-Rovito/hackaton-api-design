@@ -95,7 +95,7 @@ public class CineHackacthonApplication {
 						, 10
 				)
 		);
-		showModels.add(new ShowModel(1L
+		showModels.add(new ShowModel(2L
 						, (rooms != null && rooms.size() > 1) ? rooms.get(1) : new RoomModel()
 						//, new RoomModel()
 						, movies.isEmpty() ? movie : movies.get(0)

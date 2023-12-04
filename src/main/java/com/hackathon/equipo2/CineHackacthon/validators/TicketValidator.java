@@ -11,10 +11,10 @@ import java.util.Optional;
 @Component
 public class TicketValidator {
 
-    public TicketServiceResponse ticketExist(Optional<TicketModel> ticketFind) {
+    public TicketServiceResponse<TicketModel> ticketExist(Optional<TicketModel> ticketFind) {
 
         if (ticketFind.isPresent()) {
-            return new TicketServiceResponse(
+            return new TicketServiceResponse<TicketModel>(
                     TicketEnum.OK,
                     new TicketModel(
                             new ShowModel(ticketFind.get().getShowId(),
@@ -26,14 +26,14 @@ public class TicketValidator {
                             ticketFind.get().getSeatId()));
         }//if
 
-        return new TicketServiceResponse(
+        return new TicketServiceResponse<TicketModel>(
                 TicketEnum.NOT_FOUND,
                 new TicketModel());
     }//ticketExist
 
-    public TicketServiceResponse createTicket(TicketModel ticketBuy){
+    public TicketServiceResponse<TicketModel> createTicket(TicketModel ticketBuy){
 
-        return new TicketServiceResponse(
+        return new TicketServiceResponse<TicketModel>(
                 TicketEnum.CREATED,
                 new TicketModel(
                         new ShowModel(ticketBuy.getShowId(),
