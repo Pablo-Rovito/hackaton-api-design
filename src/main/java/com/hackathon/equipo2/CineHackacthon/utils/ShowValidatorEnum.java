@@ -13,7 +13,9 @@ public enum ShowValidatorEnum {
 
     SHOW_VALID                      ("SVL005", "Show validator was okay", HttpStatus.OK),
 
-    SHOW_ADD_VALID                  ("SVL004", "Show added successfully", HttpStatus.OK)
+    SHOW_ADD_VALID                  ("SVL004", "Show added successfully", HttpStatus.OK),
+
+    SHOW_NOT_EXISTS                ("SVL006", "Show added successfully", HttpStatus.OK)
 
 
     ;

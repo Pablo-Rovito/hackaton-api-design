@@ -13,4 +13,5 @@ public class TicketServiceResponse<T> extends ServiceResponse<T> {
         super(ticketEnum.getHttpStatus(), ticketEnum.getCode(), ticketEnum.getMessage(), payload);
     }
 
+
 }//class
