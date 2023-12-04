@@ -92,6 +92,7 @@ public class CineHackacthonApplication {
 						, new RoomModel()
 						, movies.isEmpty() ? movie : movies.get(0)
 						, new ScheduleModel(1L, dateStart,  dateEnd)
+						, 10
 				)
 		);
 
