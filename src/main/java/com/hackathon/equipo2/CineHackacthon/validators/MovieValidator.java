@@ -11,58 +11,58 @@ import java.util.Optional;
 
 @Component
 public class MovieValidator {
-    public MovieServiceResponse existMovieList(List<MovieModel> movies) {
+    public MovieServiceResponse<List<MovieModel>> existMovieList(List<MovieModel> movies) {
         if(movies != null) {
-            return new MovieServiceResponse(MovieEnum.OK.getHttpStatus(),MovieEnum.OK.getCode(),MovieEnum.OK.getMessage(), null, movies);
+            return new MovieServiceResponse<List<MovieModel>>(MovieEnum.OK.getHttpStatus(),MovieEnum.OK.getCode(),MovieEnum.OK.getMessage(), null, movies);
 
         } else {
-            return new MovieServiceResponse(MovieEnum.NOT_FOUND.getHttpStatus(),MovieEnum.NOT_FOUND.getCode(),MovieEnum.NOT_FOUND.getMessage(), null,null);
+            return new MovieServiceResponse<List<MovieModel>>(MovieEnum.NOT_FOUND.getHttpStatus(),MovieEnum.NOT_FOUND.getCode(),MovieEnum.NOT_FOUND.getMessage(), null,null);
 
 
         }
 
     }
-    public MovieServiceResponse createMovie(Optional<MovieModel> movie, MovieModel newMovie) {
+    public MovieServiceResponse<MovieModel> createMovie(Optional<MovieModel> movie, MovieModel newMovie) {
         if(movie.isPresent()) {
             
-            return new MovieServiceResponse(MovieEnum.MOVIE_ALREADY_CREATED.getHttpStatus(),MovieEnum.MOVIE_ALREADY_CREATED.getCode(),MovieEnum.MOVIE_ALREADY_CREATED.getMessage(), movie.get());
+            return new MovieServiceResponse<MovieModel>(MovieEnum.MOVIE_ALREADY_CREATED.getHttpStatus(),MovieEnum.MOVIE_ALREADY_CREATED.getCode(),MovieEnum.MOVIE_ALREADY_CREATED.getMessage(), movie.get());
 
         } else {
-            return  new MovieServiceResponse(MovieEnum.CREATED.getHttpStatus(), MovieEnum.CREATED.getCode(), MovieEnum.CREATED.getMessage(),  newMovie);
+            return  new MovieServiceResponse<MovieModel>(MovieEnum.CREATED.getHttpStatus(), MovieEnum.CREATED.getCode(), MovieEnum.CREATED.getMessage(),  newMovie);
 
 
         }
 
     }
 
-    public MovieServiceResponse exist(Optional<MovieModel> movie) {
+    public MovieServiceResponse<MovieModel> exist(Optional<MovieModel> movie) {
         if(movie.isPresent()) {
-            return new MovieServiceResponse(MovieEnum.OK.getHttpStatus(),MovieEnum.OK.getCode(),MovieEnum.OK.getMessage(), movie.get());
+            return new MovieServiceResponse<MovieModel>(MovieEnum.OK.getHttpStatus(),MovieEnum.OK.getCode(),MovieEnum.OK.getMessage(), movie.get());
 
 
         } else {
-            return new MovieServiceResponse(MovieEnum.NOT_FOUND.getHttpStatus(),MovieEnum.NOT_FOUND.getCode(),MovieEnum.NOT_FOUND.getMessage(), null);
+            return new MovieServiceResponse<MovieModel>(MovieEnum.NOT_FOUND.getHttpStatus(),MovieEnum.NOT_FOUND.getCode(),MovieEnum.NOT_FOUND.getMessage(), null);
         }
 
     }
-    public MovieServiceResponse updateMovie(Optional<MovieModel> movie) {
+    public MovieServiceResponse<MovieModel> updateMovie(Optional<MovieModel> movie) {
         if(movie.isPresent()) {
-            return new MovieServiceResponse(MovieEnum.OK.getHttpStatus(),MovieEnum.OK.getCode(),MovieEnum.OK.getMessage(), movie.get());
+            return new MovieServiceResponse<MovieModel>(MovieEnum.OK.getHttpStatus(),MovieEnum.OK.getCode(),MovieEnum.OK.getMessage(), movie.get());
 
 
         } else {
-            return new MovieServiceResponse(MovieEnum.NOT_FOUND.getHttpStatus(),MovieEnum.NOT_FOUND.getCode(),MovieEnum.NOT_FOUND.getMessage(), null);
+            return new MovieServiceResponse<MovieModel>(MovieEnum.NOT_FOUND.getHttpStatus(),MovieEnum.NOT_FOUND.getCode(),MovieEnum.NOT_FOUND.getMessage(), null);
 
 
         }
 
     }
-    public MovieServiceResponse removeMovie(Optional<MovieModel> movie) {
+    public MovieServiceResponse<MovieModel> removeMovie(Optional<MovieModel> movie) {
         if(movie.isPresent()) {
-            return new MovieServiceResponse(MovieEnum.OK.getHttpStatus(),MovieEnum.OK.getCode(),MovieEnum.OK.getMessage(), movie.get());
+            return new MovieServiceResponse<MovieModel>(MovieEnum.OK.getHttpStatus(),MovieEnum.OK.getCode(),MovieEnum.OK.getMessage(), movie.get());
 
         } else {
-            return new MovieServiceResponse(MovieEnum.NOT_FOUND.getHttpStatus(),MovieEnum.NOT_FOUND.getCode(),MovieEnum.NOT_FOUND.getMessage(), null);
+            return new MovieServiceResponse<MovieModel>(MovieEnum.NOT_FOUND.getHttpStatus(),MovieEnum.NOT_FOUND.getCode(),MovieEnum.NOT_FOUND.getMessage(), null);
 
 
         }

@@ -27,9 +27,9 @@ public class CineHackacthonApplication {
         System.out.println("Application initialized!");
 
 		CineHackacthonApplication.movies = CineHackacthonApplication.moviesListExamples();
+		rooms = getRooms();
 		CineHackacthonApplication.showModel = CineHackacthonApplication.getShowsModel();
 		CineHackacthonApplication.tickets = CineHackacthonApplication.getBuyTicket();
-		rooms = getRooms();
 		System.out.println("Application initialized!");
 	}
 
@@ -87,10 +87,12 @@ public class CineHackacthonApplication {
 		}
 
 
-		showModels.add(new ShowModel(1l
+		showModels.add(new ShowModel(1L
+						//, (rooms != null && !rooms.isEmpty()) ? rooms.get(0) : new RoomModel()
 						, new RoomModel()
 						, movies.isEmpty() ? movie : movies.get(0)
-						, new ScheduleModel(1l, dateStart,  dateEnd), 0
+						, new ScheduleModel(1L, dateStart,  dateEnd)
+						, 10
 				)
 		);
 

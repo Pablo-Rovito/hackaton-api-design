@@ -1,5 +1,6 @@
 package com.hackathon.equipo2.CineHackacthon.services.responses;
 
+import com.hackathon.equipo2.CineHackacthon.models.MovieModel;
 import org.springframework.http.HttpStatus;
 
 public class ServiceResponse<T> {
