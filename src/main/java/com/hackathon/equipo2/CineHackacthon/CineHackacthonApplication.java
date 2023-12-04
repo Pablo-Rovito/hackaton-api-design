@@ -3,6 +3,8 @@ package com.hackathon.equipo2.CineHackacthon;
 
 import com.hackathon.equipo2.CineHackacthon.models.*;
 import com.hackathon.equipo2.CineHackacthon.models.ShowModel;
+import com.hackathon.equipo2.CineHackacthon.utils.DataPopulator;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
@@ -17,9 +19,10 @@ public class CineHackacthonApplication {
 
 
 	public static List<TicketModel> tickets = new ArrayList<>();
-	public static List<MovieModel> movies = new ArrayList<>();
+	public static ArrayList<MovieModel> movies = new ArrayList<>();
 
 	public static List<ShowModel> showModel = new ArrayList<ShowModel>();
+	public static List<RoomModel> rooms;
 
 	public static void main(String[] args) {
 		SpringApplication.run(CineHackacthonApplication.class, args);
@@ -28,6 +31,8 @@ public class CineHackacthonApplication {
 		CineHackacthonApplication.movies = CineHackacthonApplication.moviesListExamples();
 		CineHackacthonApplication.showModel = CineHackacthonApplication.getShowsModel();
 		CineHackacthonApplication.tickets = CineHackacthonApplication.getBuyTicket();
+		rooms = getRooms();
+		System.out.println("Application initialized!");
 	}
 
 	public static List<TicketModel> getBuyTicket() {
@@ -95,6 +100,24 @@ public class CineHackacthonApplication {
 
 		return showModels;
 
+	}
+
+	private static List<RoomModel> getRooms() {
+		List<RoomModel> rooms = new ArrayList<>();
+
+		rooms.add(
+				new RoomModel(0L, DataPopulator.seatListGenerator(5, 6, 0L))
+		);
+
+		rooms.add(
+				new RoomModel(1L, DataPopulator.seatListGenerator(10, 10, 1L))
+		);
+
+		rooms.add(
+				new RoomModel(2L, DataPopulator.seatListGenerator(15, 12, 2L))
+		);
+
+		return rooms;
 	}
 
 }
