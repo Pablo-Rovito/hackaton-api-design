@@ -17,19 +17,19 @@ public class SeatService {
 
     public SeatServiceResponse getSeats(long showId, SeatStatusEnum status) {
         SeatServiceResponse seatServiceResponse = new SeatServiceResponse();
-
-        Optional<ShowModel> optionalShowModel = showService.findById(showId);
-        ShowModel showModel = optionalShowModel.get();
-
-        List<SeatModel> seatModels = showModel.getRoomModel().getSeats();
-
-        if(status != null) {
-            seatModels = seatModels.stream()
-                    .filter(seatModel -> seatModel.getStatusCode().equals(status))
-                    .toList();
-        }
-
-        seatServiceResponse.setSeatModels(seatModels);
+//
+//        Optional<ShowModel> optionalShowModel = showService.findById(showId);
+//        ShowModel showModel = optionalShowModel.get();
+//
+//        List<SeatModel> seatModels = showModel.getRoomModel().getSeats();
+//
+//        if(status != null) {
+//            seatModels = seatModels.stream()
+//                    .filter(seatModel -> seatModel.getStatusCode().equals(status))
+//                    .toList();
+//        }
+//
+//        seatServiceResponse.setSeatModels(seatModels);
         return seatServiceResponse;
     }
 }
