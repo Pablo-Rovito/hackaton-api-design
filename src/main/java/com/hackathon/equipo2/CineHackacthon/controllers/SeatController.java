@@ -11,8 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/apitheater/v1")
-public class SeatController {
+public class SeatController extends Controller{
     @Autowired
     SeatService seatService;
     @GetMapping("/seats/{showId}")

@@ -4,13 +4,12 @@ import com.hackathon.equipo2.CineHackacthon.models.MovieModel;
 import com.hackathon.equipo2.CineHackacthon.services.MovieService;
 import com.hackathon.equipo2.CineHackacthon.services.responses.MovieServiceResponse;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@Controller
-public class MovieController extends com.hackathon.equipo2.CineHackacthon.controllers.Controller {
+@RestController
+public class MovieController extends Controller {
 
     @Autowired
     MovieService movieService;
