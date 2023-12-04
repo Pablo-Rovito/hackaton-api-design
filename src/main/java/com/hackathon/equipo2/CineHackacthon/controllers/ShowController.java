@@ -31,7 +31,15 @@ public class ShowController extends Controller {
         ShowServiceResponse<ShowModel> response = this.showService.findById(id);
 
         return new ResponseEntity<>(response, response.getHttpStatus());
+    }
 
+    @GetMapping("/shows/movies/{movieId}")
+    public ResponseEntity<ShowServiceResponse<List<ShowModel>>> getShowByMovieId(@PathVariable Long movieId) {
+        System.out.println("getShowById");
+
+        ShowServiceResponse<List<ShowModel>> response = this.showService.findByMovieId(movieId);
+
+        return new ResponseEntity<>(response, response.getHttpStatus());
     }
 
     @PostMapping("/shows")
