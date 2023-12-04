@@ -2,8 +2,11 @@ package com.hackathon.equipo2.CineHackacthon.services;
 
 import com.hackathon.equipo2.CineHackacthon.models.SeatModel;
 import com.hackathon.equipo2.CineHackacthon.models.ShowModel;
+import com.hackathon.equipo2.CineHackacthon.services.responses.SeatServiceResponse;
+import com.hackathon.equipo2.CineHackacthon.utils.SeatEnum;
 import com.hackathon.equipo2.CineHackacthon.utils.SeatStatusEnum;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -29,7 +32,10 @@ public class SeatService {
                     .toList();
         }
 
-        seatServiceResponse.setSeatModels(seatModels);
+        seatServiceResponse.setPayload(seatModels);
+        seatServiceResponse.setCode(SeatEnum.OK.getCode());
+        seatServiceResponse.setHttpStatus(SeatEnum.OK.getHttpStatus());
+        seatServiceResponse.setMessage(SeatEnum.OK.getMessage());
         return seatServiceResponse;
     }
 }

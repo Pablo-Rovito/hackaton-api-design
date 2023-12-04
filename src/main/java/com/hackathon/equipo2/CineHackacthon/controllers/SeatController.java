@@ -1,7 +1,7 @@
 package com.hackathon.equipo2.CineHackacthon.controllers;
 
 import com.hackathon.equipo2.CineHackacthon.services.SeatService;
-import com.hackathon.equipo2.CineHackacthon.services.SeatServiceResponse;
+import com.hackathon.equipo2.CineHackacthon.services.responses.SeatServiceResponse;
 import com.hackathon.equipo2.CineHackacthon.utils.SeatStatusEnum;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
