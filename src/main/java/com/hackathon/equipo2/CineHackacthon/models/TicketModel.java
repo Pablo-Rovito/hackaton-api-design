@@ -5,6 +5,10 @@ public class TicketModel extends ShowModel {
     private long seatId;
     private double price;
 
+    public TicketModel(){
+
+    }
+
     public TicketModel(ShowModel show, long ticketId, long seatId, double price) {
         super(show.getShowId(), show.getRoomModel(), show.getMovieId(), show.getScheduleId());
         this.ticketId = ticketId;

@@ -1,13 +1,11 @@
 package com.hackathon.equipo2.CineHackacthon;
 
 
+import com.hackathon.equipo2.CineHackacthon.models.MovieModel;
 import com.hackathon.equipo2.CineHackacthon.models.RoomModel;
 import com.hackathon.equipo2.CineHackacthon.models.ShowModel;
 import com.hackathon.equipo2.CineHackacthon.models.TicketModel;
-import com.hackathon.equipo2.CineHackacthon.models.MovieModel;
-import com.hackathon.equipo2.CineHackacthon.models.ShowModel;
 import com.hackathon.equipo2.CineHackacthon.utils.DataPopulator;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
@@ -38,9 +36,32 @@ public class CineHackacthonApplication {
 
 		List<TicketModel> buyTickets = new ArrayList<>();
 
-//		buyTickets.add(new TicketModel(new ShowModel(123,new RoomModel(),789,101),1,1,10.50));
-//		buyTickets.add(new TicketModel(new ShowModel(987,654,789,321),2,2,11.50));
-//		buyTickets.add(new TicketModel(new ShowModel(123,456,789,101),3,3,12.50));
+		buyTickets.add(
+				new TicketModel(
+						new ShowModel(123,
+									new RoomModel(0L, DataPopulator.seatListGenerator(4,5,1L)),
+										789,
+										101),
+										1,
+										1,
+										10.50));
+		buyTickets.add(
+				new TicketModel(
+						new ShowModel(987,
+									new RoomModel(1L, DataPopulator.seatListGenerator(3,4,2L)),
+										789,
+										321),
+										2,
+										2,
+										11.50));
+		buyTickets.add(new TicketModel(
+				new ShowModel(123,
+								new RoomModel(2L, DataPopulator.seatListGenerator(7,6,3L)),
+										789,
+										101),
+										3,
+										3,
+										12.50));
 
 		return buyTickets;
 	}//getBuyTicket
