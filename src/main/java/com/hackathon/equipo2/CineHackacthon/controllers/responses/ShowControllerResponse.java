@@ -1,10 +1,10 @@
 package com.hackathon.equipo2.CineHackacthon.controllers.responses;
 
-import com.hackathon.equipo2.CineHackacthon.utils.ShowEnum;
+import com.hackathon.equipo2.CineHackacthon.utils.ShowServiceEnum;
 
 public class ShowControllerResponse extends ControllerResponse {
 
-    private ShowEnum showEnum;
+    private ShowServiceEnum showServiceEnum;
 
     private Object showObj;
 
@@ -12,17 +12,17 @@ public class ShowControllerResponse extends ControllerResponse {
     public ShowControllerResponse() {
     }
 
-    public ShowControllerResponse(ShowEnum showEnum, Object showObj) {
-        this.showEnum = showEnum;
+    public ShowControllerResponse(ShowServiceEnum showServiceEnum, Object showObj) {
+        this.showServiceEnum = showServiceEnum;
         this.showObj = showObj;
     }
 
-    public ShowEnum getShowEnum() {
-        return showEnum;
+    public ShowServiceEnum getShowEnum() {
+        return showServiceEnum;
     }
 
-    public void setShowEnum(ShowEnum showEnum) {
-        this.showEnum = showEnum;
+    public void setShowEnum(ShowServiceEnum showServiceEnum) {
+        this.showServiceEnum = showServiceEnum;
     }
 
     public Object getShowObj() {

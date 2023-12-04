@@ -19,19 +19,17 @@ public class TicketValidator {
                     new TicketModel(
                             new ShowModel(ticketFind.get().getShowId(),
                                         ticketFind.get().getRoomModel(),
-                                        ticketFind.get().getMovieId(),
-                                        ticketFind.get().getScheduleId()
-                                    ),
+                                        ticketFind.get().getMovie(),
+                                        ticketFind.get().getSchedule(),
+                                        ticketFind.get().getPrice()),
                             ticketFind.get().getTicketId(),
                             ticketFind.get().getSeatId(),
-                            ticketFind.get().getPrice()),
-                    true);
+                            ticketFind.get().getPrice()));
         }//if
 
         return new TicketServiceResponse(
                 TicketEnum.NOT_FOUND,
-                new TicketModel(),
-                false);
+                new TicketModel());
     }//ticketExist
 
     public TicketServiceResponse createTicket(TicketModel ticketBuy){
@@ -41,13 +39,13 @@ public class TicketValidator {
                 new TicketModel(
                         new ShowModel(ticketBuy.getShowId(),
                                 ticketBuy.getRoomModel(),
-                                ticketBuy.getMovieId(),
-                                ticketBuy.getScheduleId()
+                                ticketBuy.getMovie(),
+                                ticketBuy.getSchedule(),
+                                ticketBuy.getPrice()
                         ),
                         ticketBuy.getTicketId(),
                         ticketBuy.getSeatId(),
-                        ticketBuy.getPrice()),
-                true
+                        ticketBuy.getPrice())
         );
     }//createTicket
 

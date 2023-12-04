@@ -1,19 +1,13 @@
 package com.hackathon.equipo2.CineHackacthon.services;
 
-import com.hackathon.equipo2.CineHackacthon.CineHackacthonApplication;
-import com.hackathon.equipo2.CineHackacthon.models.SeatModel;
 import com.hackathon.equipo2.CineHackacthon.models.TicketModel;
 import com.hackathon.equipo2.CineHackacthon.repositories.TicketRepository;
 import com.hackathon.equipo2.CineHackacthon.services.responses.TicketServiceResponse;
-import com.hackathon.equipo2.CineHackacthon.utils.SeatStatusEnum;
 import com.hackathon.equipo2.CineHackacthon.validators.TicketValidator;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class TicketService {

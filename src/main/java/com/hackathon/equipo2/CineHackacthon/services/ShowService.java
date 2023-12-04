@@ -1,7 +1,11 @@
 package com.hackathon.equipo2.CineHackacthon.services;
 
+import com.hackathon.equipo2.CineHackacthon.models.MovieModel;
 import com.hackathon.equipo2.CineHackacthon.models.ShowModel;
+import com.hackathon.equipo2.CineHackacthon.models.ShowValidatorModel;
 import com.hackathon.equipo2.CineHackacthon.repositories.ShowRepository;
+import com.hackathon.equipo2.CineHackacthon.services.responses.ShowServiceResponse;
+import com.hackathon.equipo2.CineHackacthon.utils.ShowServiceEnum;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,35 +17,89 @@ public class ShowService {
     
     @Autowired
     ShowRepository showRepository;
+    @Autowired
+    MovieService movieService;
+//    @Autowired
+//    RoomService roomService;
 
-    public List<ShowModel> findAll() {
-        List<ShowModel> result = this.showRepository.findAll();
-        return result;
+    public ShowServiceResponse<List<ShowModel>> findAll() {
+        ShowServiceResponse<List<ShowModel>> responseService = new ShowServiceResponse<List<ShowModel>>();
+        List<ShowModel> showList = this.showRepository.findAll();
+        responseService.setEnum(ShowServiceEnum.SHOW_CALL_OK);
+        responseService.setPayload(showList);
+
+        // crear ShowRequestModel y ShowResponseModel ??
+        return responseService;
     }
 
 
-    public Optional<ShowModel> findById(Long id) {
+    public ShowServiceResponse<ShowModel> findById(Long id) {
+
+        ShowModel show = new ShowModel();
+        ShowServiceResponse<ShowModel> responseService = new ShowServiceResponse<ShowModel>(ShowServiceEnum.SHOW_CALL_ERROR, show);
         if (id == null) {
             id = -1l;
         }
-        return this.showRepository.findById(id);
+
+        Optional<ShowModel> showById = this.showRepository.findById(id);
+        if (showById.isPresent()) {
+            responseService.setEnum(ShowServiceEnum.SHOW_CALL_OK);
+            responseService.setPayload(showById.get());
+        }
+
+        return responseService;
     }
 
-    public ShowModel addShow(ShowModel show) {
-        return this.showRepository.add(show);
-    }
-
-    public ShowModel deleteShow(Long id) {
-        Optional<ShowModel> showModel = this.findById(id);
+    public ShowServiceResponse<ShowModel> addShow(ShowModel show) {
         ShowModel result = new ShowModel();
-        if (showModel.isEmpty()) {
-            return result;
+        ShowServiceResponse<ShowModel> responseService = new ShowServiceResponse<ShowModel>(ShowServiceEnum.SHOW_CALL_ERROR, result);
+
+        show.setShowId(this.showRepository.getNextId());
+
+        ShowValidatorModel valid = this.canAddShow(show);
+
+        MovieModel movie = this.movieService.findById(show.getMovie().getId());
+        show.setMovie(movie);
+
+//        RoomModel room = this.roomService.findById(show.getRoomModel().getId());
+
+
+        ShowModel showAdded = this.showRepository.add(show);
+        responseService.setEnum(ShowServiceEnum.SHOW_CALL_OK);
+        responseService.setPayload(showAdded);
+
+        return  responseService;
+    }
+
+
+
+    public ShowServiceResponse<ShowModel> deleteShow(Long id) {
+
+        ShowModel result = new ShowModel();
+        ShowServiceResponse<ShowModel> responseService = new ShowServiceResponse<ShowModel>(ShowServiceEnum.SHOW_CALL_ERROR, result);
+        ShowServiceResponse<ShowModel> showResponse = this.findById(id);
+
+        ShowModel showModel = showResponse.getPayload();
+
+        if (!showResponse.getCode().equals(ShowServiceEnum.SHOW_CALL_OK.getCode())) {
+            return responseService;
         }
         boolean isDeleted = this.showRepository.delete(id);
         if (isDeleted) {
-            result = showModel.get();
+            responseService.setPayload(showModel);
+            responseService.setEnum(ShowServiceEnum.SHOW_CALL_OK);
         }
-        return result;
+        return responseService;
+    }
+
+
+    private ShowValidatorModel canAddShow(ShowModel show) {
+
+        // existe room
+        // existe movie
+        // solapa schedule
+
+        return null;
     }
 
 
