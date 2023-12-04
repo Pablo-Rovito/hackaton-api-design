@@ -19,7 +19,7 @@ public class CineHackacthonApplication {
 
 
 	public static List<TicketModel> tickets = new ArrayList<>();
-	public static ArrayList<MovieModel> movies = new ArrayList<>();
+	public static List<MovieModel> movies = new ArrayList<>();
 
 	public static List<ShowModel> showModel = new ArrayList<ShowModel>();
 	public static List<RoomModel> rooms;
@@ -80,11 +80,11 @@ public class CineHackacthonApplication {
 		Date dateEnd = new Date();
 		try {
 			String dateStartS = "2023-12-01 18:00";
-			DateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+			DateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 			dateStart = format.parse(dateStartS);
 
 			String dateEndS = "2023-12-01 20:00";
-			DateFormat formatEnd = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+			DateFormat formatEnd = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 			dateEnd = formatEnd.parse(dateEndS);
 		} catch (Exception e) {
 			System.out.println(e.toString());
