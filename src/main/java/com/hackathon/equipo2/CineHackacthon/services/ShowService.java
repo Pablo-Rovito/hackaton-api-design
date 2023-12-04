@@ -1,7 +1,6 @@
 package com.hackathon.equipo2.CineHackacthon.services;
 
 import com.hackathon.equipo2.CineHackacthon.models.MovieModel;
-import com.hackathon.equipo2.CineHackacthon.models.RoomModel;
 import com.hackathon.equipo2.CineHackacthon.models.ShowModel;
 import com.hackathon.equipo2.CineHackacthon.models.ShowValidatorModel;
 import com.hackathon.equipo2.CineHackacthon.repositories.ShowRepository;
@@ -83,8 +82,8 @@ public class ShowService {
             }
         }
 
-        MovieModel movie = this.movieService.findById(show.getMovie().getId());
-        show.setMovie(movie);
+        MovieServiceResponse movie = this.movieService.findById(show.getMovie().getId());
+        show.setMovie((MovieModel) movie.getPayload());
 
         RoomServiceResponse<RoomModel> room = this.roomService.findById(show.getRoomModel().getId());
         show.setRoomModel(room.getPayload());

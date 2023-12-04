@@ -2,9 +2,7 @@ package com.hackathon.equipo2.CineHackacthon;
 
 
 import com.hackathon.equipo2.CineHackacthon.models.*;
-import com.hackathon.equipo2.CineHackacthon.models.ShowModel;
 import com.hackathon.equipo2.CineHackacthon.utils.DataPopulator;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
@@ -41,9 +39,7 @@ public class CineHackacthonApplication {
 
 		List<TicketModel> buyTickets = new ArrayList<>();
 
-//		buyTickets.add(new TicketModel(new ShowModel(123,new RoomModel(),789,101),1,1,10.50));
-//		buyTickets.add(new TicketModel(new ShowModel(987,654,789,321),2,2,11.50));
-//		buyTickets.add(new TicketModel(new ShowModel(123,456,789,101),3,3,12.50));
+		buyTickets.add(new TicketModel(showModel.get(0), 1L,2L));
 
 		return buyTickets;
 	}//getBuyTicket
