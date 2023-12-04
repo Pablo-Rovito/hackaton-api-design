@@ -18,11 +18,10 @@ public class SeatService {
     @Autowired
     ShowService showService;
 
-    public SeatServiceResponse getSeats(long showId, SeatStatusEnum status) {
-        SeatServiceResponse seatServiceResponse = new SeatServiceResponse();
+    public SeatServiceResponse<List<SeatModel>> getSeats(long showId, SeatStatusEnum status) {
+        SeatServiceResponse<List<SeatModel>> seatServiceResponse = new SeatServiceResponse<List<SeatModel>>();
 
-        Optional<ShowModel> optionalShowModel = showService.findById(showId);
-        ShowModel showModel = optionalShowModel.get();
+        ShowModel showModel = showService.findById(showId).getPayload();
 
         List<SeatModel> seatModels = showModel.getRoomModel().getSeats();
 

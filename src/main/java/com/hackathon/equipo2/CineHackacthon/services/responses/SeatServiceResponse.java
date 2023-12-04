@@ -6,11 +6,11 @@ import org.springframework.http.HttpStatus;
 
 import java.util.List;
 
-public class SeatServiceResponse extends ServiceResponse{
+public class SeatServiceResponse<T> extends ServiceResponse<T>{
     public SeatServiceResponse() {
     }
 
-    public SeatServiceResponse(HttpStatus httpStatus, String code, String message, SeatModel payload, boolean success) {
-        super(httpStatus, code, message, payload, success);
+    public SeatServiceResponse(HttpStatus httpStatus, String code, String message, T payload) {
+        super(httpStatus, code, message, payload);
     }
 }
