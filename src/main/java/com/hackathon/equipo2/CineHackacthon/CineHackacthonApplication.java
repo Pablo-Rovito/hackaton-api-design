@@ -88,8 +88,16 @@ public class CineHackacthonApplication {
 
 
 		showModels.add(new ShowModel(1L
-						//, (rooms != null && !rooms.isEmpty()) ? rooms.get(0) : new RoomModel()
-						, new RoomModel()
+						, (rooms != null && !rooms.isEmpty()) ? rooms.get(0) : new RoomModel()
+						//, new RoomModel()
+						, movies.isEmpty() ? movie : movies.get(0)
+						, new ScheduleModel(1L, dateStart,  dateEnd)
+						, 10
+				)
+		);
+		showModels.add(new ShowModel(2L
+						, (rooms != null && rooms.size() > 1) ? rooms.get(1) : new RoomModel()
+						//, new RoomModel()
 						, movies.isEmpty() ? movie : movies.get(0)
 						, new ScheduleModel(1L, dateStart,  dateEnd)
 						, 10
@@ -104,15 +112,15 @@ public class CineHackacthonApplication {
 		List<RoomModel> rooms = new ArrayList<>();
 
 		rooms.add(
-				new RoomModel(0L, DataPopulator.seatListGenerator(5, 6, 0L))
+				new RoomModel(0L, DataPopulator.seatListGenerator(2, 2, 0L))
 		);
 
 		rooms.add(
-				new RoomModel(1L, DataPopulator.seatListGenerator(10, 10, 1L))
+				new RoomModel(1L, DataPopulator.seatListGenerator(1, 3, 1L))
 		);
 
 		rooms.add(
-				new RoomModel(2L, DataPopulator.seatListGenerator(15, 12, 2L))
+				new RoomModel(2L, DataPopulator.seatListGenerator(4, 1, 2L))
 		);
 
 		return rooms;

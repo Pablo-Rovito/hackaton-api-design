@@ -4,8 +4,11 @@ import com.hackathon.equipo2.CineHackacthon.CineHackacthonApplication;
 import com.hackathon.equipo2.CineHackacthon.models.ShowModel;
 import org.springframework.stereotype.Repository;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Repository
 public class ShowRepository {
@@ -36,5 +39,10 @@ public class ShowRepository {
             id = Math.max(show.getShowId(), id);
         }
         return id + 1;
+    }
+
+    public List<ShowModel> findByMovieId(Long movieId) {
+        return CineHackacthonApplication.showModel.stream().filter(s -> Objects.equals(s.getMovie().getId(), movieId)).collect(Collectors.toList());
+
     }
 }
