@@ -6,8 +6,13 @@ import org.springframework.http.HttpStatus;
 
 import java.util.List;
 
-public class MovieServiceResponse extends ServiceResponse {
+public class MovieServiceResponse<T> extends ServiceResponse<T> {
     List<MovieModel> movies = null;
+
+    public void setMovies(List<MovieModel> movies) {
+        this.movies = movies;
+    }
+
 
     public List<MovieModel> getMovies() {
         return movies;
@@ -17,10 +22,10 @@ public class MovieServiceResponse extends ServiceResponse {
 
     }
 
-    public MovieServiceResponse(HttpStatus httpStatus, String code, String message, MovieModel payload) {
+    public MovieServiceResponse(HttpStatus httpStatus, String code, String message, T payload) {
         super(httpStatus, code, message, payload);
     }
-    public MovieServiceResponse(HttpStatus httpStatus, String code, String message, MovieModel payload, List<MovieModel> movies ) {
+    public MovieServiceResponse(HttpStatus httpStatus, String code, String message, T payload, List<MovieModel> movies ) {
         super(httpStatus, code, message, payload);
         this.movies = movies;
     }

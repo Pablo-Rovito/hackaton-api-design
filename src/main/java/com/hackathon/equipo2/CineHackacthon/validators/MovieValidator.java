@@ -22,12 +22,13 @@ public class MovieValidator {
         }
 
     }
-    public MovieServiceResponse createMovie(Optional<MovieModel> movie) {
+    public MovieServiceResponse createMovie(Optional<MovieModel> movie, MovieModel newMovie) {
         if(movie.isPresent()) {
+            
             return new MovieServiceResponse(MovieEnum.MOVIE_ALREADY_CREATED.getHttpStatus(),MovieEnum.MOVIE_ALREADY_CREATED.getCode(),MovieEnum.MOVIE_ALREADY_CREATED.getMessage(), movie.get());
 
         } else {
-            return new MovieServiceResponse(MovieEnum.CREATED.getHttpStatus(),MovieEnum.CREATED.getCode(),MovieEnum.CREATED.getMessage(), null);
+            return  new MovieServiceResponse(MovieEnum.CREATED.getHttpStatus(), MovieEnum.CREATED.getCode(), MovieEnum.CREATED.getMessage(),  newMovie);
 
 
         }

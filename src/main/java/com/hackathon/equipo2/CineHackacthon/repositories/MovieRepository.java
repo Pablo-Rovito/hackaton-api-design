@@ -23,6 +23,7 @@ public class MovieRepository {
 
     public MovieModel add(MovieModel movie) {
         CineHackacthonApplication.movies.add(movie);
+        System.out.println(CineHackacthonApplication.movies);
         return movie;
     }
 
