@@ -5,6 +5,8 @@ import com.hackathon.equipo2.CineHackacthon.models.TicketModel;
 import com.hackathon.equipo2.CineHackacthon.repositories.TicketRepository;
 import com.hackathon.equipo2.CineHackacthon.services.responses.ShowServiceResponse;
 import com.hackathon.equipo2.CineHackacthon.services.responses.TicketServiceResponse;
+import com.hackathon.equipo2.CineHackacthon.utils.SeatStatusEnum;
+import com.hackathon.equipo2.CineHackacthon.utils.TicketEnum;
 import com.hackathon.equipo2.CineHackacthon.validators.TicketSeatIsAvailableValidator;
 import com.hackathon.equipo2.CineHackacthon.validators.TicketValidator;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +25,8 @@ public class TicketService {
     TicketValidator ticketValidator;
     @Autowired
     TicketSeatIsAvailableValidator ticketSeatIsAvailableValidator;
+    @Autowired
+    SeatService seatService;
 
     public List<TicketModel> getAllBuyTickets() {
         System.out.println("getAllBuyTickets en TicketService");
@@ -45,7 +49,12 @@ public class TicketService {
         ShowServiceResponse<ShowModel> showResponse = showService.findById(ticket.getShowId());
         ticket.setShow(showResponse.getPayload());
 
-        return ticketValidator.createTicket(ticketRepository.createTicket(ticket));
+        seatService.changeStatus(ticket.getSeatId(), ticket.getShowId(), SeatStatusEnum.UNAVAILABLE);
+        ticketRepository.createTicket(ticket);
+
+        return new TicketServiceResponse<TicketModel>(
+                TicketEnum.CREATED,
+                ticket);
     }//createTicket
 
 }//class
