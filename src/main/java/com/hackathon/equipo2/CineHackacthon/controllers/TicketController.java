@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-public class TicketController {
+public class TicketController extends Controller{
 
     @Autowired
     TicketService ticketService;

@@ -2,19 +2,17 @@ package com.hackathon.equipo2.CineHackacthon.utils;
 
 import org.springframework.http.HttpStatus;
 
-public enum TicketEnum {
-
-    OK ("T001", "Ticket encontrado", HttpStatus.OK),
-    NOT_FOUND ("T002", "Ticket no encontrado",HttpStatus.NOT_FOUND),
-    CREATED ("T003", "Ticket comprado", HttpStatus.CREATED),
-    SEAT_TAKEN ("T004", "This seat is taken", HttpStatus.BAD_REQUEST),
-    SEAT_NOT_FOUND ("T005", "This seat doesn't exist", HttpStatus.NOT_FOUND);
+public enum SeatEnum {
+    OK ("ST001", "data found", HttpStatus.OK),
+    NOT_FOUND ("ST002", "no seats found", HttpStatus.NOT_FOUND),
+    CREATED ("ST003", "seat created", HttpStatus.CREATED),
+    SEAT_ALREADY_CREATED ("ST004", "seat already listed", HttpStatus.METHOD_NOT_ALLOWED);
 
     private String code;
     private String message;
     private HttpStatus httpStatus;
 
-    TicketEnum(String code, String message, HttpStatus httpStatus) {
+    SeatEnum(String code, String message, HttpStatus httpStatus) {
         this.code = code;
         this.message = message;
         this.httpStatus = httpStatus;
@@ -31,5 +29,4 @@ public enum TicketEnum {
     public HttpStatus getHttpStatus() {
         return httpStatus;
     }
-
-}//class
+}
