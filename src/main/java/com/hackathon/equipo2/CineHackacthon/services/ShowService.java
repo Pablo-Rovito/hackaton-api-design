@@ -5,11 +5,17 @@ import com.hackathon.equipo2.CineHackacthon.models.RoomModel;
 import com.hackathon.equipo2.CineHackacthon.models.ShowModel;
 import com.hackathon.equipo2.CineHackacthon.models.ShowValidatorModel;
 import com.hackathon.equipo2.CineHackacthon.repositories.ShowRepository;
+import com.hackathon.equipo2.CineHackacthon.services.responses.RoomServiceResponse;
 import com.hackathon.equipo2.CineHackacthon.services.responses.ShowServiceResponse;
 import com.hackathon.equipo2.CineHackacthon.utils.ShowServiceEnum;
+import com.hackathon.equipo2.CineHackacthon.validators.showValidators.ShowMovieExistsValidator;
+import com.hackathon.equipo2.CineHackacthon.validators.showValidators.ShowRoomExistsValidator;
+import com.hackathon.equipo2.CineHackacthon.validators.showValidators.ShowScheduleOverlapValidator;
+import com.hackathon.equipo2.CineHackacthon.validators.showValidators.AbstractShowValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -20,16 +26,24 @@ public class ShowService {
     ShowRepository showRepository;
     @Autowired
     MovieService movieService;
-//    @Autowired
-//    RoomService roomService;
+    @Autowired
+    RoomService roomService;
+    @Autowired
+    ShowMovieExistsValidator movieExistsValidator;
+    @Autowired
+    ShowRoomExistsValidator roomExistsValidator;
+
+    @Autowired
+    ShowScheduleOverlapValidator overlapValidator;
+
+    List<AbstractShowValidator> validators;
 
     public ShowServiceResponse<List<ShowModel>> findAll() {
         ShowServiceResponse<List<ShowModel>> responseService = new ShowServiceResponse<List<ShowModel>>();
         List<ShowModel> showList = this.showRepository.findAll();
-        responseService.setEnum(ShowServiceEnum.SHOW_CALL_OK);
+        responseService.setShowServiceEnum(ShowServiceEnum.SHOW_CALL_OK);
         responseService.setPayload(showList);
 
-        // crear ShowRequestModel y ShowResponseModel ??
         return responseService;
     }
 
@@ -44,7 +58,7 @@ public class ShowService {
 
         Optional<ShowModel> showById = this.showRepository.findById(id);
         if (showById.isPresent()) {
-            responseService.setEnum(ShowServiceEnum.SHOW_CALL_OK);
+            responseService.setShowServiceEnum(ShowServiceEnum.SHOW_CALL_OK);
             responseService.setPayload(showById.get());
         }
 
@@ -57,16 +71,26 @@ public class ShowService {
 
         show.setShowId(this.showRepository.getNextId());
 
-        ShowValidatorModel valid = this.canAddShow(show);
+        validators = new ArrayList<AbstractShowValidator>();
+        validators.add(movieExistsValidator);
+        validators.add(roomExistsValidator);
+        validators.add(overlapValidator);
+        for (AbstractShowValidator validator: this.validators) {
+            ShowValidatorModel valid = validator.apply(show);
+            if (!valid.isValid()) {
+                responseService.setShowValidatorEnum(valid.getShowValidatorEnum());
+                return responseService;
+            }
+        }
 
         MovieModel movie = this.movieService.findById(show.getMovie().getId());
         show.setMovie(movie);
 
-//        RoomModel room = this.roomService.findById(show.getRoomModel().getId());
-
+        RoomServiceResponse<RoomModel> room = this.roomService.findById(show.getRoomModel().getId());
+        show.setRoomModel(room.getPayload());
 
         ShowModel showAdded = this.showRepository.add(show);
-        responseService.setEnum(ShowServiceEnum.SHOW_CALL_OK);
+        responseService.setShowServiceEnum(ShowServiceEnum.SHOW_CALL_OK);
         responseService.setPayload(showAdded);
 
         return  responseService;
@@ -88,20 +112,11 @@ public class ShowService {
         boolean isDeleted = this.showRepository.delete(id);
         if (isDeleted) {
             responseService.setPayload(showModel);
-            responseService.setEnum(ShowServiceEnum.SHOW_CALL_OK);
+            responseService.setShowServiceEnum(ShowServiceEnum.SHOW_CALL_OK);
         }
         return responseService;
     }
 
-
-    private ShowValidatorModel canAddShow(ShowModel show) {
-
-        // existe room
-        // existe movie
-        // solapa schedule
-
-        return null;
-    }
 
 
 
