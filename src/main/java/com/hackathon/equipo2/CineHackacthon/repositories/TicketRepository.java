@@ -12,28 +12,24 @@ public class TicketRepository {
 
     public List<TicketModel> getAllBuyTickets() {
         System.out.println("getAllBuyTickets en TicketRepository");
+
         return CineHackacthonApplication.tickets;
     }//getAllBuyTickets
 
     public Optional<TicketModel> findTicketById(long ticketId) {
+        System.out.println("findTicketById en TicketRepository");
 
-        Optional<TicketModel> ticketFind = Optional.empty();
-
-        for (TicketModel findTicket : CineHackacthonApplication.getBuyTicket()) {
-            if (findTicket.getTicketId() == ticketId) {
-                System.out.println("Ticket encontrado");
-                ticketFind = Optional.of(findTicket);
-            }//if
-        }//for
-
-        return ticketFind;
+        return CineHackacthonApplication.getBuyTicket().stream()
+                .filter(ticketModel -> ticketId == ticketModel.getTicketId())
+                .findFirst();
     }//findTicketById
 
     public TicketModel createTicket(TicketModel ticket) {
         System.out.println("createTicket en TicketRepository");
+
         CineHackacthonApplication.getBuyTicket().add(ticket);
+
         return ticket;
     }//createTicket
-
 
 }//class

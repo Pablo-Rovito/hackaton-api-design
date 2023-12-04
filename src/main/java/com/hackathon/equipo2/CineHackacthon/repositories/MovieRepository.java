@@ -4,7 +4,6 @@ import com.hackathon.equipo2.CineHackacthon.CineHackacthonApplication;
 import com.hackathon.equipo2.CineHackacthon.models.MovieModel;
 import org.springframework.stereotype.Repository;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 

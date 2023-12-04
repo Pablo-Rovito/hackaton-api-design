@@ -3,6 +3,7 @@ package com.hackathon.equipo2.CineHackacthon.services;
 import com.hackathon.equipo2.CineHackacthon.models.RoomModel;
 import com.hackathon.equipo2.CineHackacthon.repositories.RoomRepository;
 import com.hackathon.equipo2.CineHackacthon.services.responses.RoomServiceResponse;
+import com.hackathon.equipo2.CineHackacthon.utils.RoomEnum;
 import com.hackathon.equipo2.CineHackacthon.validators.RoomValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,19 +21,19 @@ public class RoomService {
         return roomRepository.findAll();
     }
 
-    public RoomServiceResponse findById(long roomId) {
+    public RoomServiceResponse<RoomModel> findById(long roomId) {
 
         return roomValidator
                 .exists(roomRepository.findById(roomId));
     }
 
-    public RoomServiceResponse update(RoomModel updatedRoom) {
+    public RoomServiceResponse<RoomModel> update(RoomModel updatedRoom) {
 
-        RoomServiceResponse response = roomValidator
+        RoomServiceResponse<RoomModel> response = roomValidator
                 .exists(roomRepository.findById(updatedRoom.getId()));
 
 
-        if(!response.isSuccess()) {
+        if (!response.getCode().equals(RoomEnum.OK.getCode())) {
             return response;
         }
 
@@ -42,13 +43,12 @@ public class RoomService {
         return response;
     }
 
-    public RoomServiceResponse create(RoomModel room) {
+    public RoomServiceResponse<RoomModel> create(RoomModel room) {
 
-        RoomServiceResponse response = roomValidator
+        RoomServiceResponse<RoomModel> response = roomValidator
                 .alreadyInList(roomRepository.findById(room.getId()));
 
-
-        if(!response.isSuccess()) {
+        if (!response.getCode().equals(RoomEnum.CREATED.getCode())) {
             return response;
         }
 
@@ -57,12 +57,12 @@ public class RoomService {
         return response;
     }
 
-    public RoomServiceResponse delete(RoomModel room) {
-        RoomServiceResponse response = roomValidator
+    public RoomServiceResponse<RoomModel> delete(RoomModel room) {
+        RoomServiceResponse<RoomModel> response = roomValidator
                 .exists(roomRepository.findById(room.getId()));
 
 
-        if(!response.isSuccess()) {
+        if (!response.getCode().equals(RoomEnum.OK.getCode())) {
             return response;
         }
 
