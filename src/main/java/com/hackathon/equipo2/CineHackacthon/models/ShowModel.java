@@ -5,16 +5,26 @@ public class ShowModel {
     private RoomModel roomModel;
     private MovieModel movie;
     private ScheduleModel schedule;
+    private double price;
+
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
+    }
 
     public ShowModel() {
     }
 
-    public ShowModel(long showId, RoomModel roomModel, MovieModel movie, ScheduleModel schedule) {
+    public ShowModel(long showId, RoomModel roomModel, MovieModel movie, ScheduleModel schedule, double price) {
 //        this.showId = showId;
         this.showId = showId;
         this.roomModel = roomModel;
         this.movie = movie;
         this.schedule = schedule;
+        this.price = price;
     }
 
     public long getShowId() {

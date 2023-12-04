@@ -1,7 +1,6 @@
 package com.hackathon.equipo2.CineHackacthon.models;
 
 import com.hackathon.equipo2.CineHackacthon.utils.ValidatorEnum;
-import org.springframework.stereotype.Component;
 
 
 public class ValidatorModel {

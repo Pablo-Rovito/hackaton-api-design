@@ -1,7 +1,6 @@
 package com.hackathon.equipo2.CineHackacthon.validators;
 
 import com.hackathon.equipo2.CineHackacthon.models.RoomModel;
-import com.hackathon.equipo2.CineHackacthon.services.RoomService;
 import com.hackathon.equipo2.CineHackacthon.services.responses.RoomServiceResponse;
 import com.hackathon.equipo2.CineHackacthon.utils.RoomEnum;
 import org.springframework.stereotype.Component;

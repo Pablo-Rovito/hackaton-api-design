@@ -1,7 +1,6 @@
 package com.hackathon.equipo2.CineHackacthon.services;
 
 import com.hackathon.equipo2.CineHackacthon.models.MovieModel;
-import com.hackathon.equipo2.CineHackacthon.models.RoomModel;
 import com.hackathon.equipo2.CineHackacthon.models.ShowModel;
 import com.hackathon.equipo2.CineHackacthon.models.ShowValidatorModel;
 import com.hackathon.equipo2.CineHackacthon.repositories.ShowRepository;
