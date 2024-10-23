@@ -51,6 +51,7 @@ public class SeatService {
 
     public void changeStatus(long idSeat, long idShow, SeatStatusEnum seatEnum) {
         SeatModel seatModel = findById(idSeat, idShow).get();
+        System.err.println(seatModel);
         seatModel.setStatusCode(seatEnum);
     }
 }
